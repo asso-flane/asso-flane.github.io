@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/style.css">
+<title>Flâne</title>
+
+<style>
+:root {
+    --vert-fonce: #2d6a4f;
+    --vert-doux: #95d5b2;
+    --fond: #f8f9fa;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+
+    background:
+        radial-gradient(circle at 20% 30%, rgba(149,213,178,0.15), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(116,198,157,0.12), transparent 40%),
+        linear-gradient(180deg, #f1f8f5, #e6f4ea);
+
+    background-attachment: fixed;
+}
+
+/* ===== BANDEAU ===== */
+.header {
+    height: 260px;
+    background: radial-gradient(circle at center, #1b4332, #081c15);
+    position: relative;
+    overflow: hidden;
+}
+
+/* lumière respirante */
+.header::after {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.05), transparent 60%);
+    animation: breathe 12s infinite ease-in-out;
+}
+
+@keyframes breathe {
+    0%,100% { transform: scale(1); opacity: 0.4; }
+    50% { transform: scale(1.2); opacity: 0.7; }
+}
+
+/* ===== TEXTE FLOTTANT AMÉLIORÉ ===== */
+.header-title {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) scaleY(0);
+    transform-origin: bottom;
+    font-size: 80px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    pointer-events: none;
+    white-space: nowrap;
+
+    /* visibilité + style */
+    background: linear-gradient(180deg, #d8f3dc, #95d5b2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    text-shadow:
+        0 0 10px rgba(255,255,255,0.15),
+        0 0 25px rgba(149,213,178,0.2);
+
+    animation: growTree 6s ease-out forwards,
+               sway 6s ease-in-out infinite 6s;
+}
+
+/* halo doux */
+.header-title::before {
+    content: "Flâne";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: rgba(255,255,255,0.05);
+    filter: blur(8px);
+    z-index: -1;
+}
+
+/* pousse */
+@keyframes growTree {
+    0% {
+        transform: translateX(-50%) scaleY(0);
+        opacity: 0;
+        filter: blur(6px);
+    }
+    40% {
+        transform: translateX(-50%) scaleY(1.1);
+        opacity: 1;
+        filter: blur(2px);
+    }
+    70% {
+        transform: translateX(-50%) scaleY(0.95);
+    }
+    100% {
+        transform: translateX(-50%) scaleY(1);
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+/* mouvement léger */
+@keyframes sway {
+    0%,100% { transform: translateX(-50%) scaleY(1) rotate(0deg); }
+    50% { transform: translateX(-50%) scaleY(1) rotate(1.5deg); }
+}
+
+/* feuilles */
+.leaf {
+    position: absolute;
+    opacity: 0.9;
+}
+
+.leaf1 { width: 70px; left: 8%; animation: drift 18s infinite linear; }
+.leaf2 { width: 50px; left: 25%; animation: drift 22s infinite linear reverse; }
+.leaf3 { width: 65px; left: 55%; animation: drift 20s infinite linear; }
+.leaf4 { width: 45px; left: 75%; animation: drift 24s infinite linear reverse; }
+
+@keyframes drift {
+    0%   { transform: translateY(-80px) translateX(0px) rotate(0deg); }
+    25%  { transform: translateY(60px) translateX(20px) rotate(90deg); }
+    50%  { transform: translateY(140px) translateX(-20px) rotate(180deg); }
+    75%  { transform: translateY(220px) translateX(15px) rotate(270deg); }
+    100% { transform: translateY(320px) translateX(0px) rotate(360deg); }
+}
+
+/* ===== Citation ===== */
+.quote {
+    text-align: center;
+    padding: 20px;
+    font-style: italic;
+    background: white;
+}
+
+/* ===== Structure ===== */
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+.section {
+    padding: 25px 20px;
+}
+
+.section:nth-child(even) {
+    background: #ffffff;
+}
+
+h2 {
+    color: var(--vert-fonce);
+}
+
+/* ===== Images ===== */
+.img {
+    width: 100%;
+    max-width: 600px;
+    display: block;
+    margin: 15px auto;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+/* ===== Cartes ===== */
+.grid {
+    display: grid;
+    gap: 15px;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* ===== Contact ===== */
+.contact {
+    background: var(--vert-fonce);
+    color: white;
+}
+
+.contact input,
+.contact textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 6px;
+    border: none;
+}
+
+.contact button {
+    margin-top: 10px;
+    padding: 12px;
+    width: 100%;
+    background: var(--vert-doux);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* ===== Responsive ===== */
+@media(min-width:768px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== BANDEAU ===== -->
+<div class="header">
+
+<div class="header-title">Flâne</div>
+
+<svg class="leaf leaf1" viewBox="0 0 100 100">
+<path d="M50 5 C80 20, 95 50, 50 95 C5 50, 20 20, 50 5 Z" fill="#74c69d"/>
+</svg>
+
+<svg class="leaf leaf2" viewBox="0 0 100 100">
+<path d="M50 5 C78 18, 90 50, 50 92 C10 50, 22 18, 50 5 Z" fill="#52b788"/>
+</svg>
+
+<svg class="leaf leaf3" viewBox="0 0 100 100">
+<path d="M50 8 C75 20, 88 50, 50 90 C12 50, 25 20, 50 8 Z" fill="#95d5b2"/>
+</svg>
+
+<svg class="leaf leaf4" viewBox="0 0 100 100">
+<path d="M50 5 C82 25, 90 50, 50 95 C10 50, 18 25, 50 5 Z" fill="#40916c"/>
+</svg>
+
+</div>
+
+<!-- ===== Citation ===== -->
+<div class="quote">
+« Le retard n’a de sens que pour celui qui s’est engagé dans la course.<br>
+Il n’en a aucun pour celui qui ouvre un nouveau chemin. »<br>
+— Anne Alombert
+</div>
+
+<div class="container">
+
+<div class="section">
+<h2>Bienvenue chez Flâne</h2>
+
+<p>
+C’est un plaisir de vous souhaiter la bienvenue chez Flâne, l’association pour favoriser l’arborescence de notre être.
+</p>
+
+<p><strong>Flâne a pour vocation :</strong></p>
+
+<ul>
+<li>De retrouver la voix de notre être.</li>
+
+<li>De partager des outils, de la connaissance, des activités, du temps, de la présence.</li>
+
+<li>De développer la rencontre : ateliers, conférences, stages, lectures, chant…</li>
+
+<li>De sortir de la performance, de la rapidité, des jeux de pouvoir, de la spécificité fragile, pour mettre en place un juste milieu pour chacun, avec sobriété, robustesse, décroissance… et même de l’inutilité.</li>
+</ul>
+
+</div>
+
+<div class="section">
+<h2>Intervenant</h2>
+
+<p>
+Thierry Renaud est le premier intervenant dans Flâne.
+</p>
+
+<p>
+Il propose dans un premier temps, trois boîtes à outils :
+</p>
+
+ <div class="grid">
+
+        <a href="dessin-controlateral.html" class="card">
+            <img src="images/dessin.png" alt="Dessin controlatéral">
+            <h3>Dessin controlatéral</h3>
+            <p>Accéder au document et à la pratique</p>
+        </a>
+
+        <a href="mandalas.html" class="card">
+            <img src="images/mandala.png" alt="Mandalas">
+            <h3>Mandalas</h3>
+            <p>Explorer la symbolique et la création</p>
+        </a>
+
+        <a href="symbolique-corps-humain.html" class="card">
+            <img src="images/corps-symbolique.png" alt="Symbolique du corps humain">
+            <h3>Symbolique du corps humain</h3>
+            <p>Lire et contempler les correspondances</p>
+        </a>
+
+</div>
+<div class="section">
+<h2>Présentation de Thierry Renaud</h2>
+<p>Formateur en relations humaines, j’utilise l’analyse transactionnelle, les
+données de l’école de Palo Alto, l’hypnose, la PNL… et mes années
+d’accompagnement psychologique auprès de mes patients au sein de mon
+cabinet. Depuis 1988, j’anime des séminaires variés : mandalas, initiation
+à la fonction symbolique, à la symbolique du corps humain, clown-thérapie
+et dessin controlatéral en complément de mon activité médicale.</p>
+</div>
+
+<div class="section contact">
+<h2>Contact</h2>
+<form>
+<input type="text" placeholder="Votre nom">
+<input type="email" placeholder="Votre email">
+<textarea rows="4" placeholder="Votre message"></textarea>
+<button>Envoyer</button>
+</form>
+</div>
+
+</div>
+
+</body>
+</html>
