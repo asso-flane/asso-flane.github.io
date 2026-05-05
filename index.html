@@ -322,17 +322,17 @@ et dessin controlatéral en complément de mon activité médicale. Je propose u
 </div>
 
 <div class="section contact">
-  <h2>Contact</h2>
-
-  https://formspree.io/f/xkoyrqkv
+<h2>Contact</h2>
+<form action="https://formtree.io/submit/abcd1234" method="POST">
     <input type="text" name="nom" placeholder="Votre nom" required>
-
     <input type="email" name="email" placeholder="Votre email" required>
-
     <textarea name="message" rows="4" placeholder="Votre message" required></textarea>
 
+    <!-- optionnel : anti-spam -->
+    <input type="hidden" name="_subject" value="Nouveau message depuis flane.fr">
+
     <button type="submit">Envoyer</button>
-  </form>
+</form>
 </div>
 
 </div>
